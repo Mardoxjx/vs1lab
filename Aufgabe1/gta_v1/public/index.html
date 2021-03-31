@@ -25,9 +25,35 @@
 			<section class="tagging">
 				<h2>Tagging</h2>
 
-				<!-- ############### Aufgabe1a Form1 Start -->
-				<form id="tag-form" action="/tagging" method="post"></form>
+				<!-- ############### Aufgabe1a Form1 Strt -->
+				<form id="tag-form" action="/tagging" method="post">
+					<fieldset>
+						<legend>Enter new GeoTag:</legend>
+						<label>Latitude:</label>
+						<br>
+						<input id="latitude" placeholder="latitude" required>
+						<br>
+						<label>Longitude:</label>
+						<br>
+						<input id="longitude" placeholder="longitude" required>
+						<br>
+						<label>Name:</label>
+						<br>
+						<input id="name" placeholder="name" pattern="[a-zA-ZäöüÄÖÜß]{1,10}">
+						<br>
+						<label>Hashtag:</label>
+						<br>
+						<input id="hashtag" placeholder="# + max. 10 letters" pattern="(#{1}[a-zA-ZäöüÄÖÜß]{1,10}){0,1}">
+						<br>
+						<button id="tagging-button"><em>Submit</em></button>
+						</label>
+					</fieldset>
+
+
+
+				</form>
 				<!-- ############### Aufgabe1a Form1 Ende -->
+
 
 			</section>
 
@@ -35,7 +61,20 @@
 				<h2>Discovery</h2>
 
 				<!-- ############### Aufgabe1a Form2 Start -->
-				<form id="filter-form" action="/discovery" method="post"></form>
+				<form id="filter-form" action="/discovery" method="post">
+
+					<fieldset>
+						<legend>Filter by Searchterm:</legend>
+						<input id="search-term" placeholder="search term">
+						<button id="search-term-button"><em>apply</em></button>
+					</fieldset>
+
+
+
+
+
+
+				</form>
 				<!-- ############### Aufgabe1a Form2 Ende -->
 
 				<div class="taglist">
