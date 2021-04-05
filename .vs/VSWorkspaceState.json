@@ -1,11 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\.github\\workflows",
     "\\Aufgabe1",
     "\\Aufgabe1\\gta_v1",
-    "\\Aufgabe1\\gta_v1\\public"
+    "\\Aufgabe1\\gta_v1\\public",
+    "\\Aufgabe1\\gta_v1\\public\\javascripts",
+    "\\Aufgabe1\\gta_v1\\public\\stylesheets",
+    "\\Aufgabe2",
+    "\\Aufgabe2\\gta_v2",
+    "\\Aufgabe2\\gta_v2\\public",
+    "\\Aufgabe2\\gta_v2\\public\\javascripts"
   ],
-  "SelectedNode": "\\Aufgabe1\\gta_v1\\public\\index.html",
+  "SelectedNode": "\\Aufgabe2\\gta_v2\\public\\javascripts\\geotagging.js",
   "PreviewInSolutionExplorer": false
 }
