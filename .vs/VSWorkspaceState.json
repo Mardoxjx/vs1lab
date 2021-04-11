@@ -4,13 +4,9 @@
     "\\Aufgabe1",
     "\\Aufgabe1\\gta_v1",
     "\\Aufgabe1\\gta_v1\\public",
-    "\\Aufgabe1\\gta_v1\\public\\javascripts",
-    "\\Aufgabe1\\gta_v1\\public\\stylesheets",
-    "\\Aufgabe2",
-    "\\Aufgabe2\\gta_v2",
-    "\\Aufgabe2\\gta_v2\\public",
-    "\\Aufgabe2\\gta_v2\\public\\javascripts"
+    "\\Aufgabe1\\gta_v1\\public\\images",
+    "\\Aufgabe1\\gta_v1\\public\\stylesheets"
   ],
-  "SelectedNode": "\\Aufgabe2\\gta_v2\\public\\javascripts\\geotagging.js",
+  "SelectedNode": "\\Aufgabe1\\gta_v1\\public\\images\\location.png",
   "PreviewInSolutionExplorer": false
 }

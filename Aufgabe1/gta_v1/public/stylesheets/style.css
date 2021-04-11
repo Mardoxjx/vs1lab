@@ -1,6 +1,10 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  grid-template-areas: 
+      "header"
+      "row1" "row2"
+      "rowA" "rowB";
 }
 
 a {
@@ -11,48 +15,64 @@ header {
     background-color: grey;
     color: white;
     padding: 10px;
+    grid-area: header;
 }
 
 footer {
     background-color: grey;
     padding: 10px;
     color: white;
+    grid-area: footer;
 }
 
 .flexbox {
     display:flex;
 }
 
-.flexbox .flex-element {
+.flexbox [class*="row"] {
     margin: 20px;
-    display:block;
 }
+
 
 .flexbox2 {
     display: flex;
     flex-direction: row;
 }
 
-.flexbox2 .flex-element2 {
-       margin-right: 20px;
-       margin-bottom: 30px;
+.flexbox2 [class*="row"] {
+    margin-right: 20px;
+    margin-bottom: 30px;
 }
+
+
 
 .value{
     display:block;
     padding: 5px;
 }
 
-.tag-form {
-    padding-right: 50px;
-}
 
 #results li {
-    border: 2px solid #1e7aeb;
-    background-color: #1e7aeb;
+    border: 4px solid #00B7FF;
+    background-color: #00B7FF;
     margin-bottom: 5px;
     color: white;
 }
+
+
+@media (max-width:1210px) {      
+    .flexbox {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .flexbox2 {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+}
+
+
 
 
 
