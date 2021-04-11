@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 
 	<head>
 		<meta charset="UTF-8">
@@ -21,36 +23,63 @@
 		</header>
 
 		<main>
+			<div class="flexbox">
+					<div class="col-2">
+						<div class="row1">
+							<h2>Tagging</h2>
 
-			<section class="tagging">
-				<h2>Tagging</h2>
+							<!-- ############### Aufgabe1a Form1 Strt -->
+							<form id="tag-form" action="/tagging" method="post">
+								<fieldset>
+									<legend>Enter new GeoTag:</legend>
+									<label class="value">Latitude:</label>
+									<input class="value" id="latitude" placeholder="latitude" required>
+									<label class="value">Longitude:</label>
+									<input class="value" id="longitude" placeholder="longitude" required>
+									<label class="value">Name:</label>
+									<input class="value" id="name" placeholder="name" pattern="[a-zA-ZäöüÄÖÜß]{1,10}" required>
+									<label class="value">Hashtag:</label>
+									<input class="value" id="hashtag" placeholder="# + max. 10 letters" pattern="(#{1}[a-zA-ZäöüÄÖÜß]{1,10}){0,1}">
+									<button class="value" id="tagging-button">Submit</button>
+								</fieldset>
+							</form>
+							<!-- ############### Aufgabe1a Form1 Ende -->
+						</div>
+					</div>
 
-				<!-- ############### Aufgabe1a Form1 Start -->
-				<form id="tag-form" action="/tagging" method="post"></form>
-				<!-- ############### Aufgabe1a Form1 Ende -->
+					
+					<div class="col-11">
+						<div class="row2">
+							<h2>Discovery</h2>
 
-			</section>
+							<!-- ############### Aufgabe1a Form2 Start -->
+							<form id="filter-form" action="/discovery" method="post">
 
-			<section class="discovery">
-				<h2>Discovery</h2>
+								<fieldset>
+									<legend>Filter by Searchterm:</legend>
+									<input id="search-term" placeholder="search term">
+									<button id="search-term-button">Apply</button>
+								</fieldset>
+							</form>
+						</div>
 
-				<!-- ############### Aufgabe1a Form2 Start -->
-				<form id="filter-form" action="/discovery" method="post"></form>
-				<!-- ############### Aufgabe1a Form2 Ende -->
+						<div class="flexbox2">
+						<!-- ############### Aufgabe1a Form2 Ende -->
 
-				<div class="taglist">
-					<ul id="results">
-						<li>Castle (49.01379, 8.404435) #sight</li>
-						<li>IWI (49.01379, 8.390071) #edu</li>
-					</ul>
-				</div>
-
-				<div class="tagmap">
-					<img id="result-img" src="./images/mapview.jpg" alt="a map with locations"/>
-					<div class="caption">Result map</div>
-				</div>
-
-			</section>
+								<div class="rowA">
+									<ul id="results">
+										<li>Castle (49.01379, 8.404435) #sight</li>
+										<li>IWI (49.01379, 8.390071) #edu</li>
+									</ul>
+								</div>
+						
+								<div class="rowB">
+									<img id="result-img" src="./images/mapview.jpg" alt="a map with locations" />
+									<div class="caption">Result map</div>
+								</div>
+						</div>
+					</div>
+			</div>
 
 		</main>
 

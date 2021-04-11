@@ -3,8 +3,10 @@
     "",
     "\\Aufgabe1",
     "\\Aufgabe1\\gta_v1",
-    "\\Aufgabe1\\gta_v1\\public"
+    "\\Aufgabe1\\gta_v1\\public",
+    "\\Aufgabe1\\gta_v1\\public\\images",
+    "\\Aufgabe1\\gta_v1\\public\\stylesheets"
   ],
-  "SelectedNode": "\\Aufgabe1\\gta_v1\\public\\index.html",
+  "SelectedNode": "\\Aufgabe1\\gta_v1\\public\\images\\location.png",
   "PreviewInSolutionExplorer": false
 }
