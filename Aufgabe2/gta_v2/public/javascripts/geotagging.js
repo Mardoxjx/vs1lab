@@ -71,6 +71,8 @@ var gtaLocator = (function GtaLocator(geoLocationApi) {
         }
     };
 
+
+
     // Auslesen Breitengrad aus der Position
     var getLatitude = function(position) {
         return position.coords.latitude;
@@ -120,7 +122,17 @@ var gtaLocator = (function GtaLocator(geoLocationApi) {
         readme: "Dieses Objekt enthält 'öffentliche' Teile des Moduls.",
 
         updateLocation: function() {
-            // TODO Hier Inhalt der Funktion "update" ergänzen
+            var error = function(errorCode){
+                alert(errorCode);
+            }
+            var sucess = function(position){
+                var latitude = document.getElementById("latitude");
+                latitude.value = getLatitude(position);
+                var longitude = document.getElementById("longitude");
+                longitude.value = getLongitude(position);
+
+            }
+            tryLocate(sucess(),error());
         }
 
     }; // ... Ende öffentlicher Teil
@@ -133,5 +145,6 @@ var gtaLocator = (function GtaLocator(geoLocationApi) {
  */
 $(function() {
     alert("Please change the script 'geotagging.js'");
+    gtaLocator.updateLocation();
     // TODO Hier den Aufruf für updateLocation einfügen
 });
