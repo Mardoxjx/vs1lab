@@ -128,9 +128,11 @@ var gtaLocator = (function GtaLocator(geoLocationApi) {
             function success(position){
                 document.getElementById("longitude").value = getLongitude(position);
                 document.getElementById("latitude").value = getLatitude(position);
-                console.log("testSuccess");
                 var url = getLocationMapSrc(getLatitude(position), getLongitude(position));
                 document.getElementById("result-img").src = url;
+                document.getElementById("discoveryLongitude").value = getLongitude(position);
+                document.getElementById("discoveryLatitude").value = getLatitude(position);
+
 
             };
             function error(errorMessage) {
