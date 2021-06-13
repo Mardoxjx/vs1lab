@@ -19,7 +19,9 @@ app = express();
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({
     extended: false
+
 }));
+
 
 // Setze ejs als View Engine
 app.set('view engine', 'ejs');
@@ -30,11 +32,22 @@ app.set('view engine', 'ejs');
  */
 
 // TODO: CODE ERGÄNZEN
+app.use(express.static('public'));
 
 /**
  * Konstruktor für GeoTag Objekte.
  * GeoTag Objekte sollen min. alle Felder des 'tag-form' Formulars aufnehmen.
  */
+
+function GeoTag(Name, Latitude, Longitude, Hashtag){
+    this.Latitude = Latitude;
+    this.Longitude = Longitude;
+    this.Name = Name;
+    this.Hashtag = Hashtag;
+    console.log("Konstruktor wurde aufgerufen");
+
+}
+
 
 // TODO: CODE ERGÄNZEN
 
@@ -46,6 +59,49 @@ app.set('view engine', 'ejs');
  * - Funktion zum hinzufügen eines Geo Tags.
  * - Funktion zum Löschen eines Geo Tags.
  */
+var Speicher = [];
+
+function searchByRadius(Radius, Latitude, Longitude){
+    var array = [];
+    var j = 0;
+
+    for(var i = 0; i<Speicher.length; i++){
+        var y = Math.abs(Speicher[i].Latitude - Latitude);
+        var x = Math.abs(Speicher[i].Longitude - Longitude);
+        var abstand = Math.sqrt(x*x + y*y);
+        if(abstand <= Radius){
+            array[j] = Speicher[i];
+            j++;
+        }
+    }
+    return array;
+}
+function searchByName(name){
+    var array = [];
+    var j = 0;
+    for(var i = 0; i<Speicher.length; i++){
+        var bool = name === Speicher[i].Name;
+        if(bool){
+            array[j] = Speicher[i];
+            j++;
+        }
+
+    }
+    return array;
+}
+
+function addGeoTag(geoTag_Element){
+    Speicher.push(geoTag_Element);
+}
+
+function removeGeoTag(geoTag_Element){
+    for(var i = 0; i < Speicher.length; i++){
+        if(geoTag_Element === Speicher[i]){
+          Speicher.splice(i);
+        }
+    }
+}
+
 
 // TODO: CODE ERGÄNZEN
 
@@ -60,9 +116,15 @@ app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
     res.render('gta', {
-        taglist: []
+        taglist: [],
+        latitude: [],
+        longitude: [],
+        name: [],
+        hashtag: []
+
     });
 });
+
 
 /**
  * Route mit Pfad '/tagging' für HTTP 'POST' Requests.
@@ -78,6 +140,23 @@ app.get('/', function(req, res) {
  */
 
 // TODO: CODE ERGÄNZEN START
+app.post('/tagging', function(req, res,next){
+    var geoTag = new GeoTag(req.body.name, req.body.latitude, req.body.longitude,req.body.hashtag);
+    addGeoTag(geoTag);
+    var arr = [];
+    arr = searchByRadius(100, 48.963758399999996, 8.6104901);
+    res.render('gta', {
+        taglist: arr,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
+        name: req.body.name,
+        hashtag: req.body.hashtag
+
+
+    });
+    console.log(geoTag);
+});
+
 
 /**
  * Route mit Pfad '/discovery' für HTTP 'POST' Requests.
@@ -92,7 +171,20 @@ app.get('/', function(req, res) {
  */
 
 // TODO: CODE ERGÄNZEN
+app.post('/discovery', function(req, res){
+    console.log("test1");
+    var arr = [];
+    if(req.body != undefined){
+        arr = searchByName(req.body.name);
+    }
+    else{
+        arr = searchByRadius(100, 48.963758399999996, 8.6104901);
+    }
+    res.render('gta', {
+       taglist: arr
+    });
 
+});
 /**
  * Setze Port und speichere in Express.
  */
