@@ -44,7 +44,6 @@ function GeoTag(Name, Latitude, Longitude, Hashtag){
     this.Longitude = Longitude;
     this.Name = Name;
     this.Hashtag = Hashtag;
-    console.log("Konstruktor wurde aufgerufen");
 
 }
 
@@ -116,7 +115,7 @@ function removeGeoTag(geoTag_Element){
 
 app.get('/', function(req, res) {
     res.render('gta', {
-        taglist: [],
+        taglist: Speicher,
         latitude: [],
         longitude: [],
         name: [],
@@ -138,13 +137,16 @@ app.get('/', function(req, res) {
  * Als Response wird das ejs-Template mit Geo Tag Objekten gerendert.
  * Die Objekte liegen in einem Standard Radius um die Koordinate (lat, lon).
  */
+const radius = 100;
+const defLat = 48.963758399999996;
+const defLong = 8.6104901;
 
 // TODO: CODE ERGÄNZEN START
 app.post('/tagging', function(req, res,next){
     var geoTag = new GeoTag(req.body.name, req.body.latitude, req.body.longitude,req.body.hashtag);
     addGeoTag(geoTag);
     var arr = [];
-    arr = searchByRadius(100, 48.963758399999996, 8.6104901);
+    arr = searchByRadius(radius, req.body.latitude || defLat, req.body.longitude || defLong);
     res.render('gta', {
         taglist: arr,
         latitude: req.body.latitude,
@@ -175,13 +177,17 @@ app.post('/discovery', function(req, res){
     console.log("test1");
     var arr = [];
     if(req.body != undefined){
-        arr = searchByName(req.body.name);
+        arr = searchByName(req.body.box);
     }
     else{
-        arr = searchByRadius(100, 48.963758399999996, 8.6104901);
+        arr = searchByRadius(radius, req.body.dLat || defLat, req.body.dLong || defLong);
     }
     res.render('gta', {
-       taglist: arr
+        taglist: arr,
+        longitude: [],
+        latitude:[],
+        name:[],
+        hashtag:[]
     });
 
 });
