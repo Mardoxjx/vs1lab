@@ -17,6 +17,7 @@ var express = require('express');
 var app;
 app = express();
 app.use(logger('dev'));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 
@@ -154,9 +155,7 @@ app.post('/tagging', function(req, res,next){
         name: req.body.name,
         hashtag: req.body.hashtag
 
-
     });
-    console.log(geoTag);
 });
 
 
@@ -174,7 +173,6 @@ app.post('/tagging', function(req, res,next){
 
 // TODO: CODE ERGÄNZEN
 app.post('/discovery', function(req, res){
-    console.log("test1");
     var arr = [];
     if(req.body != undefined){
         arr = searchByName(req.body.box);
@@ -191,6 +189,104 @@ app.post('/discovery', function(req, res){
     });
 
 });
+
+let geotags = [];
+
+let id = 0;
+
+// /geotags POST
+app.post('/geotags' ,function (req,res){
+    geotags.push({
+        id : id,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
+        name: req.body.name,
+        hashtag: req.body.hashtag
+    });
+    id++;
+    res.status(201);
+    res.end();
+
+});
+
+
+// /geotags GET
+app.get('/geotags' ,function (req,res){
+    if(!req.query.name){
+        res.json(geotags);
+    }
+    else{
+        var dataName = req.query.name;
+        var arr = [];
+        var j = 0;
+        for(var i = 0; i<geotags.length;i++){
+            if(geotags[i].name == dataName){
+                arr[j] = geotags[i];
+                j++;
+            }
+        }
+        res.json(arr);
+    }
+    res.status(202);
+    res.end();
+
+});
+
+app.get('/geotags/:id', function (req,res){
+    var id = req.params.id;
+    var result;
+    for(var i = 0; i<geotags.length;i++){
+        if(geotags[i].id == id){
+            result = geotags[i];
+        }
+    }
+    res.json(result);
+    res.status(202);
+    res.end();
+});
+
+app.put('/geotags/:id', function (req,res){
+    var id = req.params.id;
+    for(var i = 0; i<geotags.length;i++){
+        if(geotags[i].id == id){
+            geotags[i] = {
+                id : id,
+                latitude: req.body.latitude,
+                longitude: req.body.longitude,
+                name: req.body.name,
+                hashtag: req.body.hashtag
+            };
+
+        }
+    }
+
+    res.status(202);
+    res.end();
+
+});
+
+app.delete('/geotags/:id', function (req,res){
+    //TODO
+    var id = req.params.id;
+    for(var i = 0; i<geotags.length;i++) {
+        if (geotags[i].id == id) {
+            geotags.splice(i, 1);
+        }
+    }
+    res.status(202);
+    res.end();
+});
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Setze Port und speichere in Express.
  */
